@@ -4,12 +4,18 @@ import Image from "next/image";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 
+import { useSceneSpots } from "../services/sceneSpots";
+
 const CustomizedButton = styled(Button)`
   background-color: green;
   color: red;
 `;
 
 const Home: NextPage = () => {
+  const { spots } = useSceneSpots();
+
+  console.log(spots);
+
   return (
     <div>
       <Head>
