@@ -9,22 +9,11 @@ import Container from "@mui/material/Container";
 
 import { useSceneSpots } from "services/sceneSpots";
 import Background from "components/Background";
+import Navbar from "components/Navbar";
 
 import banner01 from "public/img/banner01.jpg";
 import taiwan_logo_white from "public/svg/taiwan_logo_white.svg";
 
-const CustomizedButton = muiStyled(Button)`
-  background-color: green;
-  color: red;
-`;
-const Title = styled.h1`
-  color: red;
-`;
-
-const TaiwanLogoContainer = styled.div`
-  background-color: green;
-  justify-content: center;
-`;
 const Home: NextPage = () => {
   const { spots } = useSceneSpots();
 
@@ -36,8 +25,8 @@ const Home: NextPage = () => {
         <title>Hello World</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Background src={banner01}>
+        <Navbar />
         <Container maxWidth="sm">
           <Image
             src={taiwan_logo_white}
