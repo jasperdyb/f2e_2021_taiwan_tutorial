@@ -3,12 +3,15 @@ import Head from "next/head";
 import Image from "next/image";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
+
 import { styled as muiStyled } from "@mui/material/styles";
+import Container from "@mui/material/Container";
 
-import { useSceneSpots } from "../services/sceneSpots";
-import Background from "../components/Background";
+import { useSceneSpots } from "services/sceneSpots";
+import Background from "components/Background";
 
-import banner01 from "../public/img/banner01.jpg";
+import banner01 from "public/img/banner01.jpg";
+import taiwan_logo_white from "public/svg/taiwan_logo_white.svg";
 
 const CustomizedButton = muiStyled(Button)`
   background-color: green;
@@ -18,6 +21,10 @@ const Title = styled.h1`
   color: red;
 `;
 
+const TaiwanLogoContainer = styled.div`
+  background-color: green;
+  justify-content: center;
+`;
 const Home: NextPage = () => {
   const { spots } = useSceneSpots();
 
@@ -31,8 +38,14 @@ const Home: NextPage = () => {
       </Head>
 
       <Background src={banner01}>
-        <Title> 蘋方體QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ</Title>
-        <CustomizedButton variant="text">Text</CustomizedButton>
+        <Container maxWidth="sm">
+          <Image
+            src={taiwan_logo_white}
+            alt="Taiwan Logo"
+            objectPosition="center"
+            objectFit="cover"
+          />
+        </Container>
       </Background>
     </>
   );
