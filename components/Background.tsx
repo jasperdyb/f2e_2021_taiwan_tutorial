@@ -1,14 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import styled from "styled-components";
 import { ImageProps } from "next/image";
+import { styled } from "@mui/material/styles";
 
-const BackgroundImageContainer = styled.div`
+const BackgroundImageContainer = styled("div")`
   position: "fix";
   z-index: -100;
 `;
 
-const BackgroundImageChildrenContainer = styled.div`
+const BackgroundImageChildrenContainer = styled("div")`
   position: relative;
   z-index: 0;
 `;

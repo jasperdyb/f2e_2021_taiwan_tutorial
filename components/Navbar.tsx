@@ -15,27 +15,25 @@ const CustomAppBar = styled(AppBar)`
   background-color: transparent;
   box-shadow: none;
   padding: 0 140px;
-  color: black;
+  color: #fff;
 `;
 
 const menu = ["旅遊情報", "景點查詢", "美食推薦", "旅宿資訊", "節慶活動"];
 
 const Navbar: React.FC = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <CustomAppBar position="sticky">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            TAIWAN TRAVEL
-          </Typography>
-          {menu.map((item, index) => (
-            <Button key={index} color="inherit">
-              {item}
-            </Button>
-          ))}
-        </Toolbar>
-      </CustomAppBar>
-    </Box>
+    <CustomAppBar position="sticky">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          TAIWAN TRAVEL
+        </Typography>
+        {menu.map((item, index) => (
+          <Button key={index} color="inherit">
+            {item}
+          </Button>
+        ))}
+      </Toolbar>
+    </CustomAppBar>
   );
 };
 

@@ -10,9 +10,16 @@ import Container from "@mui/material/Container";
 import { useSceneSpots } from "services/sceneSpots";
 import Background from "components/Background";
 import Navbar from "components/Navbar";
+import SearchPanel from "components/SearchPanel";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
 import banner01 from "public/img/banner01.jpg";
 import taiwan_logo_white from "public/svg/taiwan_logo_white.svg";
+
+const SearchPanelContainer = styled(Container)`
+  padding: 0;
+`;
 
 const Home: NextPage = () => {
   const { spots } = useSceneSpots();
@@ -35,6 +42,11 @@ const Home: NextPage = () => {
             objectFit="cover"
           />
         </Container>
+        <Grid container justifyContent="center">
+          <Grid item>
+            <SearchPanel />
+          </Grid>
+        </Grid>
       </Background>
     </>
   );
