@@ -17,7 +17,7 @@ import Grid from "@mui/material/Grid";
 import banner01 from "public/img/banner01.jpg";
 import taiwan_logo_white from "public/svg/taiwan_logo_white.svg";
 
-const Home: NextPage = () => {
+const Search: NextPage = () => {
   const { spots } = useSceneSpots();
 
   console.log(spots);
@@ -48,4 +48,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Search;

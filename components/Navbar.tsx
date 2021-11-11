@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import Link from "next/link";
 
 // import styled from "styled-components";
 import { styled } from "@mui/material/styles";
@@ -18,7 +19,13 @@ const CustomAppBar = styled(AppBar)`
   color: #fff;
 `;
 
-const menu = ["旅遊情報", "景點查詢", "美食推薦", "旅宿資訊", "節慶活動"];
+const menu = [
+  { title: "旅遊情報", link: "/" },
+  { title: "景點查詢", link: "/search" },
+  { title: "美食推薦", link: "/" },
+  { title: "旅宿資訊", link: "/" },
+  { title: "節慶活動", link: "/" },
+];
 
 const Navbar: React.FC = () => {
   return (
@@ -28,9 +35,9 @@ const Navbar: React.FC = () => {
           TAIWAN TRAVEL
         </Typography>
         {menu.map((item, index) => (
-          <Button key={index} color="inherit">
-            {item}
-          </Button>
+          <Link key={index} href={item.link} passHref>
+            <Button color="inherit">{item.title}</Button>
+          </Link>
         ))}
       </Toolbar>
     </CustomAppBar>
