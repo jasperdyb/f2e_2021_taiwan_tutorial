@@ -6,16 +6,33 @@ import styled from "styled-components";
 
 import { styled as muiStyled } from "@mui/material/styles";
 import Container from "@mui/material/Container";
+import Navbar from "components/Navbar";
+import Typography from "@mui/material/Typography";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import Stack from "@mui/material/Stack";
 
 import { useSceneSpots } from "services/sceneSpots";
+import banner04 from "public/img/banner04.jpg";
 import Background from "components/Background";
-import Navbar from "components/Navbar";
-import SearchPanel from "components/SearchPanel";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import Carousel from "components/Carousel";
 
-import banner01 from "public/img/banner01.jpg";
-import taiwan_logo_white from "public/svg/taiwan_logo_white.svg";
+const carouselImageSize = {
+  height: 212,
+  width: 444,
+};
+
+const CarouselImageContainer = styled("div")``;
+
+const CarouselContainer = styled(Stack)`
+  background-color: pink;
+  overflow: hidden;
+`;
 
 const Search: NextPage = () => {
   const { spots } = useSceneSpots();
@@ -28,22 +45,28 @@ const Search: NextPage = () => {
         <title>Hello World</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Background src={banner01}>
-        <Navbar />
-        <Container maxWidth="sm">
-          <Image
-            src={taiwan_logo_white}
-            alt="Taiwan Logo"
-            objectPosition="center"
-            objectFit="cover"
-          />
-        </Container>
-        <Grid container justifyContent="center">
-          <Grid item>
-            <SearchPanel />
-          </Grid>
-        </Grid>
-      </Background>
+      <Navbar />
+      <Image
+        src={banner04}
+        alt="search page banner"
+        // width={500} automatically provided
+        height={140}
+        objectFit="cover"
+        objectPosition="center"
+      />
+      <Container>
+        <Breadcrumbs
+          aria-label="breadcrumb"
+          separator={<NavigateNextIcon fontSize="small" />}
+        >
+          <Link underline="hover" color="inherit" href="/">
+            首頁
+          </Link>
+          <Typography color="info.main">景點查詢</Typography>
+        </Breadcrumbs>
+        <Typography color="info.main">熱門景點</Typography>
+        <Carousel></Carousel>
+      </Container>
     </>
   );
 };

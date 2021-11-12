@@ -5,6 +5,9 @@ import { styled } from "@mui/material/styles";
 
 const BackgroundImageContainer = styled("div")`
   position: "fix";
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
   z-index: -100;
 `;
 
