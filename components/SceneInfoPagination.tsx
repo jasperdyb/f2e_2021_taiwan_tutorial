@@ -11,6 +11,29 @@ const CustomPagination = styled(Pagination)`
   & .MuiPagination-ul {
     justify-content: flex-end;
   }
+
+  & .MuiPaginationItem-root {
+    border-radius: 10px;
+    border-color: #a5a5a5;
+    color: #a5a5a5;
+  }
+
+  & .MuiPaginationItem-previousNext {
+    border-color: #7baebe;
+    color: #7baebe;
+  }
+
+  & .MuiPaginationItem-previousNext.Mui-disabled {
+    border: none;
+    color: #bcbcbc;
+    background-color: #e6e6e6;
+  }
+
+  & .Mui-selected {
+    background-color: #7baebe;
+    color: #ffffff;
+    border: none;
+  }
 `;
 
 const SceneInfoPagination: React.FC = () => {

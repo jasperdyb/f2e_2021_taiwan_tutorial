@@ -53,7 +53,10 @@ const mainTheme = createTheme({
       letterSpacing: "1.26px",
       lineHeight: "25px",
     },
-
+    subtitle1: {
+      fontSize: "14px",
+      lineHeight: "16px",
+    },
     body1: {
       fontSize: "16px",
       lineHeight: "25px",

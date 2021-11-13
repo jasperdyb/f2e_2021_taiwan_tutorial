@@ -24,7 +24,9 @@ import TouchAppIcon from "@mui/icons-material/TouchApp";
 
 import banner04 from "public/img/banner04.jpg";
 
-const CustomDiv = styled("div")``;
+const SceneTypeChip = styled(Chip)`
+  color: #fff;
+`;
 
 const SceneInfoCard: React.FC = () => {
   const theme = useTheme();
@@ -63,12 +65,14 @@ const SceneInfoCard: React.FC = () => {
                 justifyContent="space-between"
                 alignContent={"center"}
               >
-                <Typography color="info.main">紫坪</Typography>
-                <Chip label="自然風景" />
+                <Typography typography={"h1"} color="info.main">
+                  紫坪
+                </Typography>
+                <SceneTypeChip label="自然風景" color="primary" />
               </Stack>
             </Grid>
             <Grid item flex={1}>
-              <Typography>
+              <Typography color="grey.600">
                 帆船鼻位於綠島東南角，有「綠島地毯」之稱，可由朝日溫泉售票口旁邊的小徑沿步道而上。由於地形突出，地勢又高出四周，屬東北季季風可長驅直入的衝風帶；再加上後天的放牧
                 ......
               </Typography>
@@ -76,18 +80,22 @@ const SceneInfoCard: React.FC = () => {
             <Grid item>
               <Stack direction="row" justifyContent="space-between">
                 <Stack direction="row" spacing={2}>
-                  <Stack direction="row" alignItems={"center"}>
+                  <Stack direction="row" alignItems={"center"} spacing={"7px"}>
                     <RoomIcon color="info" fontSize="small" />
-                    <Typography>臺東縣綠島鄉</Typography>
+                    <Typography typography={"subtitle1"} color="grey.600">
+                      臺東縣綠島鄉
+                    </Typography>
                   </Stack>
-                  <Stack direction="row" alignItems={"center"}>
+                  <Stack direction="row" alignItems={"center"} spacing={"7px"}>
                     <WatchLaterIcon color="info" fontSize="small" />
-                    <Typography>全天開放</Typography>
+                    <Typography typography={"subtitle1"} color="grey.600">
+                      全天開放
+                    </Typography>
                   </Stack>
                 </Stack>
                 <Stack direction="row" alignItems={"center"}>
                   <TouchAppIcon color="primary" fontSize="small" />
-                  <Typography>1234</Typography>
+                  <Typography color="grey.600">1234</Typography>
                 </Stack>
               </Stack>
             </Grid>
