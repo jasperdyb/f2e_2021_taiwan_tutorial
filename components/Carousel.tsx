@@ -29,10 +29,10 @@ const EmblaCoverContainer = styled("div")`
 
 const EmblaCover = styled("div")`
   position: absolute;
-  top: -50%;
+  top: -200%;
   left: -5%;
   width: 110%;
-  height: 200%;
+  height: 500%;
 
   -webkit-box-shadow: inset 0px 0px 50px 100px #ffffff;
   box-shadow: inset 0px 0px 50px 100px #ffffff;

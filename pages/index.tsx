@@ -2,9 +2,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Button from "@mui/material/Button";
-import styled from "styled-components";
-
-import { styled as muiStyled } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 
 import { useSceneSpots } from "services/sceneSpots";
