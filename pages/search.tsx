@@ -11,7 +11,6 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 import banner04 from "public/img/banner04.jpg";
@@ -20,6 +19,7 @@ import Carousel from "components/Carousel";
 import SearchAutoComplete from "components/SearchAutoComplete";
 import SortSelect from "components/SortSelect";
 import SearchPanelVertical from "components/SearchPanelVertical";
+import SceneInfoCard from "components/SceneInfoCard";
 
 const Search: NextPage = () => {
   const { spots } = useSceneSpots();
@@ -66,7 +66,7 @@ const Search: NextPage = () => {
             <SearchPanelVertical />
           </Grid>
           <Grid item xs={8}>
-            <Box sx={{ height: 300, backgroundColor: "pink" }} />
+            <SceneInfoCard />
           </Grid>
         </Grid>
       </Container>

@@ -76,41 +76,39 @@ const SearchPanelVertical: React.FC = () => {
           <Grid item xs={12}>
             <Typography color="info.main">地區/縣市</Typography>
           </Grid>
-          <Grid item>
-            <Grid container spacing={"18px"}>
-              <Grid item>
-                <SearchPanelSelect
-                  labelId="region-label"
-                  value={region}
-                  onChange={(event: SelectChangeEvent<unknown>) => {
-                    setRegion(event.target.value as string);
-                  }}
-                >
-                  {regionSelections.map(
-                    (item: { title: string; value: number }, index) => (
-                      <MenuItem key={index} value={item.value}>
-                        {item.title}
-                      </MenuItem>
-                    )
-                  )}
-                </SearchPanelSelect>
-              </Grid>
-              <Grid item>
-                <SearchPanelSelect
-                  value={city}
-                  onChange={(event: SelectChangeEvent<unknown>) => {
-                    setCity(event.target.value as string);
-                  }}
-                >
-                  {citySelections.map(
-                    (item: { title: string; value: number }, index) => (
-                      <MenuItem key={index} value={item.value}>
-                        {item.title}
-                      </MenuItem>
-                    )
-                  )}
-                </SearchPanelSelect>
-              </Grid>
+          <Grid item container spacing={"18px"}>
+            <Grid item>
+              <SearchPanelSelect
+                labelId="region-label"
+                value={region}
+                onChange={(event: SelectChangeEvent<unknown>) => {
+                  setRegion(event.target.value as string);
+                }}
+              >
+                {regionSelections.map(
+                  (item: { title: string; value: number }, index) => (
+                    <MenuItem key={index} value={item.value}>
+                      {item.title}
+                    </MenuItem>
+                  )
+                )}
+              </SearchPanelSelect>
+            </Grid>
+            <Grid item>
+              <SearchPanelSelect
+                value={city}
+                onChange={(event: SelectChangeEvent<unknown>) => {
+                  setCity(event.target.value as string);
+                }}
+              >
+                {citySelections.map(
+                  (item: { title: string; value: number }, index) => (
+                    <MenuItem key={index} value={item.value}>
+                      {item.title}
+                    </MenuItem>
+                  )
+                )}
+              </SearchPanelSelect>
             </Grid>
           </Grid>
           <Grid item>
