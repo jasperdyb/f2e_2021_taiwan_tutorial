@@ -29,7 +29,7 @@ const CustomDiv = styled("div")``;
 const SceneInfoCard: React.FC = () => {
   const theme = useTheme();
   return (
-    <Card>
+    <Card raised>
       <CardActionArea>
         <Grid direction="row" container>
           <Grid item xs={5} sx={{ backgroundColor: "red" }}>

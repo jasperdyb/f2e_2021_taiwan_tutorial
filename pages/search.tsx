@@ -20,6 +20,7 @@ import SearchAutoComplete from "components/SearchAutoComplete";
 import SortSelect from "components/SortSelect";
 import SearchPanelVertical from "components/SearchPanelVertical";
 import SceneInfoCard from "components/SceneInfoCard";
+import SceneInfoPagination from "components/SceneInfoPagination";
 
 const Search: NextPage = () => {
   const { spots } = useSceneSpots();
@@ -67,6 +68,8 @@ const Search: NextPage = () => {
           </Grid>
           <Grid item xs={8}>
             <SceneInfoCard />
+
+            <SceneInfoPagination />
           </Grid>
         </Grid>
       </Container>

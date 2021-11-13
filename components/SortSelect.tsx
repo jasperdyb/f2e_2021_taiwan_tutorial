@@ -9,28 +9,29 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 
-const CustomDiv = styled("div")``;
+const CustomSelect = styled(Select)`
+  & .MuiSelect-icon {
+    left: 4px;
+  }
+
+  & .MuiSelect-select {
+    padding-left: 32px;
+  }
+`;
 
 const SortSelect: React.FC = () => {
   const [age, setAge] = React.useState("10");
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     setAge(event.target.value);
   };
 
   return (
-    <Select
+    <CustomSelect
       value={age}
       onChange={handleChange}
       displayEmpty
       IconComponent={SwapVertIcon}
-      sx={{
-        "& .MuiSelect-icon": {
-          left: 4,
-        },
-
-        "& .MuiSelect-select": { paddingLeft: "32px" },
-      }}
     >
       <MenuItem value="">
         <em>Default</em>
@@ -38,7 +39,7 @@ const SortSelect: React.FC = () => {
       <MenuItem value={10}>Ten</MenuItem>
       <MenuItem value={20}>Twenty</MenuItem>
       <MenuItem value={30}>Thirty</MenuItem>
-    </Select>
+    </CustomSelect>
   );
 };
 export default SortSelect;
