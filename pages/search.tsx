@@ -22,18 +22,6 @@ import banner04 from "public/img/banner04.jpg";
 import Background from "components/Background";
 import Carousel from "components/Carousel";
 
-const carouselImageSize = {
-  height: 212,
-  width: 444,
-};
-
-const CarouselImageContainer = styled("div")``;
-
-const CarouselContainer = styled(Stack)`
-  background-color: pink;
-  overflow: hidden;
-`;
-
 const Search: NextPage = () => {
   const { spots } = useSceneSpots();
 
@@ -45,7 +33,7 @@ const Search: NextPage = () => {
         <title>Hello World</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
+      <Navbar color="secondary" />
       <Image
         src={banner04}
         alt="search page banner"

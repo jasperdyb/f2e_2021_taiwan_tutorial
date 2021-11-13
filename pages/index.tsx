@@ -29,7 +29,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Background src={banner01}>
-        <Navbar />
+        <Navbar color="transparent" />
         <Container maxWidth="sm">
           <Image
             src={taiwan_logo_white}

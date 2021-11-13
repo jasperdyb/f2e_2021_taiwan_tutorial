@@ -21,6 +21,9 @@ const mainTheme = createTheme({
     primary: {
       main: "#E8CB89",
     },
+    secondary: {
+      main: "#A6CDE0",
+    },
     info: {
       main: "#7BAEBE",
     },

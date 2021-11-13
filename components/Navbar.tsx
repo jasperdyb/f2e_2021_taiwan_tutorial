@@ -1,4 +1,6 @@
 import * as React from "react";
+import { PropTypes } from "@mui/material";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,7 +15,6 @@ import { styled } from "@mui/material/styles";
 
 // const CustomAppBar = styled.div`
 const CustomAppBar = styled(AppBar)`
-  background-color: transparent;
   box-shadow: none;
   padding: 0 140px;
   color: #fff;
@@ -27,9 +28,13 @@ const menu = [
   { title: "節慶活動", link: "/" },
 ];
 
-const Navbar: React.FC = () => {
+interface Props {
+  color?: PropTypes.Color | "transparent";
+}
+
+const Navbar: React.FC<Props> = ({ color }) => {
   return (
-    <CustomAppBar position="sticky">
+    <CustomAppBar color={color} position="sticky">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           TAIWAN TRAVEL
