@@ -32,10 +32,9 @@ const SceneInfoCard: React.FC = () => {
     <Card raised>
       <CardActionArea>
         <Grid direction="row" container>
-          <Grid item xs={5} sx={{ backgroundColor: "red" }}>
+          <Grid item xs={5}>
             <div
               style={{
-                backgroundColor: "salmon",
                 position: "relative",
                 height: "240px",
                 width: "100%",

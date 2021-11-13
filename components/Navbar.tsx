@@ -37,7 +37,7 @@ const Navbar: React.FC<Props> = ({ color }) => {
     <CustomAppBar color={color} position="sticky">
       <Toolbar>
         <Link href={"/"} passHref>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
             TAIWAN TRAVEL
           </Typography>
         </Link>

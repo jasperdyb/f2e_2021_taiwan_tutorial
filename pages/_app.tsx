@@ -32,6 +32,34 @@ const mainTheme = createTheme({
   shape: {
     borderRadius: 15,
   },
+
+  typography: {
+    // fontFamily:font-family: PingFangTC-Regular, sans-serif,
+    fontFamily: [
+      "'EB Garamond'",
+      "PingFang TC",
+      "'Noto Sans TC'",
+      "Roboto",
+      "sans-serif",
+    ].join(","),
+    fontSize: 14,
+    h1: {
+      fontSize: "22px",
+      letterSpacing: "1.54px",
+      lineHeight: "30px",
+    },
+    h2: {
+      fontSize: "18px",
+      letterSpacing: "1.26px",
+      lineHeight: "25px",
+    },
+
+    body1: {
+      fontSize: "16px",
+      lineHeight: "25px",
+    },
+  },
+
   components: {
     MuiButton: {
       styleOverrides: {

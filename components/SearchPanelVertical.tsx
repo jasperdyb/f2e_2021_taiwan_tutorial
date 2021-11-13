@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+import styled from "styled-components";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -14,14 +17,20 @@ import Divider from "@mui/material/Divider";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { styled } from "@mui/material/styles";
 
 import SearchPanelTypeList from "components/SearchPanelTypeList";
+import SearchSelect from "components/SearchSelect";
 
-const SearchPanelSelect = styled(Select)`
-  min-width: 270px;
-  height: 50px;
-  border-radius: 10px;
+const FilterTypography = styled(Typography)`
+  margin-bottom: 16px;
+`;
+
+const FilterGrid = styled(Grid)`
+  margin-bottom: 16px;
+`;
+
+const FilterDivider = styled(Divider)`
+  margin-bottom: 16px;
 `;
 
 const SearchButton = styled(Button)`
@@ -33,98 +42,77 @@ const SearchPanelVertical: React.FC = () => {
   const [region, setRegion] = useState("10");
   const [city, setCity] = useState("30");
 
-  const regionSelections = [
-    {
-      title: "北部地區",
-      value: 10,
-    },
-    {
-      title: "中部地區",
-      value: 20,
-    },
-    {
-      title: "南部地區",
-      value: 30,
-    },
-  ];
-
-  const citySelections = [
-    {
-      title: "台北市",
-      value: 10,
-    },
-    {
-      title: "台中市",
-      value: 20,
-    },
-    {
-      title: "台南市",
-      value: 30,
-    },
-  ];
-
   return (
     <Card raised>
       <CardContent>
-        <Typography>篩選內容</Typography>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-        >
+        <FilterTypography typography={"h2"}>篩選內容</FilterTypography>
+        <FilterGrid container spacing={"18px"}>
           <Grid item xs={12}>
-            <Typography color="info.main">地區/縣市</Typography>
-          </Grid>
-          <Grid item container spacing={"18px"}>
-            <Grid item>
-              <SearchPanelSelect
-                labelId="region-label"
-                value={region}
-                onChange={(event: SelectChangeEvent<unknown>) => {
-                  setRegion(event.target.value as string);
-                }}
-              >
-                {regionSelections.map(
-                  (item: { title: string; value: number }, index) => (
-                    <MenuItem key={index} value={item.value}>
-                      {item.title}
-                    </MenuItem>
-                  )
-                )}
-              </SearchPanelSelect>
-            </Grid>
-            <Grid item>
-              <SearchPanelSelect
-                value={city}
-                onChange={(event: SelectChangeEvent<unknown>) => {
-                  setCity(event.target.value as string);
-                }}
-              >
-                {citySelections.map(
-                  (item: { title: string; value: number }, index) => (
-                    <MenuItem key={index} value={item.value}>
-                      {item.title}
-                    </MenuItem>
-                  )
-                )}
-              </SearchPanelSelect>
-            </Grid>
+            <Typography typography={"h1"} color="info.main">
+              地區/縣市
+            </Typography>
           </Grid>
           <Grid item>
-            <SearchButton disableElevation variant="contained">
-              Search
-            </SearchButton>
+            <SearchSelect
+              selections={regionSelections}
+              value={region}
+              onChange={(event: SelectChangeEvent<unknown>) => {
+                setRegion(event.target.value as string);
+              }}
+            />
           </Grid>
-        </Grid>
-        <Divider />
-        <Stack>
-          <Typography color="info.main">類別</Typography>
-          <SearchPanelTypeList></SearchPanelTypeList>
+          <Grid item>
+            <SearchSelect
+              selections={citySelections}
+              value={region}
+              onChange={(event: SelectChangeEvent<unknown>) => {
+                setCity(event.target.value as string);
+              }}
+            />
+          </Grid>
+        </FilterGrid>
+        <FilterDivider />
+        <Typography typography={"h1"} color="info.main">
+          類別
+        </Typography>
+        <SearchPanelTypeList></SearchPanelTypeList>
+        <Stack direction={"row"} justifyContent={"center"}>
+          <SearchButton disableElevation variant="contained">
+            Search
+          </SearchButton>
         </Stack>
       </CardContent>
     </Card>
   );
 };
 
+const regionSelections = [
+  {
+    title: "北部地區",
+    value: 10,
+  },
+  {
+    title: "中部地區",
+    value: 20,
+  },
+  {
+    title: "南部地區",
+    value: 30,
+  },
+];
+
+const citySelections = [
+  {
+    title: "台北市",
+    value: 10,
+  },
+  {
+    title: "台中市",
+    value: 20,
+  },
+  {
+    title: "台南市",
+    value: 30,
+  },
+];
 export default SearchPanelVertical;

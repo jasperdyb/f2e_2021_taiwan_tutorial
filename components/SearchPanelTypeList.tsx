@@ -7,8 +7,24 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import Grid from "@mui/material/Grid";
 
 const CustomDiv = styled("div")``;
+
+const options = [
+  {
+    value: "female",
+    label: "female",
+  },
+  {
+    value: "male",
+    label: "male",
+  },
+  {
+    value: "other",
+    label: "other",
+  },
+];
 
 const SearchPanelTypeList: React.FC = () => {
   return (
@@ -18,9 +34,17 @@ const SearchPanelTypeList: React.FC = () => {
         defaultValue="female"
         name="radio-buttons-group"
       >
-        <FormControlLabel value="female" control={<Radio />} label="Female" />
-        <FormControlLabel value="male" control={<Radio />} label="Male" />
-        <FormControlLabel value="other" control={<Radio />} label="Other" />
+        <Grid container>
+          {options.map((item, index) => (
+            <Grid item key={index} xs={12}>
+              <FormControlLabel
+                value={item.value}
+                control={<Radio />}
+                label={item.label}
+              />
+            </Grid>
+          ))}
+        </Grid>
       </RadioGroup>
     </FormControl>
   );

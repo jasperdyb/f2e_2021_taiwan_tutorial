@@ -25,6 +25,7 @@ const EmblaCoverContainer = styled("div")`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  pointer-events: none;
 `;
 
 const EmblaCover = styled("div")`
@@ -33,9 +34,10 @@ const EmblaCover = styled("div")`
   left: -5%;
   width: 110%;
   height: 500%;
+  pointer-events: none;
 
-  -webkit-box-shadow: inset 0px 0px 50px 100px #ffffff;
-  box-shadow: inset 0px 0px 50px 100px #ffffff;
+  -webkit-box-shadow: inset 0px 0px 50px 120px #ffffff;
+  box-shadow: inset 0px 0px 50px 120px #ffffff;
 `;
 
 const EmblaContainer = styled("div")`
@@ -44,13 +46,13 @@ const EmblaContainer = styled("div")`
   -webkit-touch-callout: none;
   -khtml-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  margin-left: -108px;
+  margin-left: -50px;
 `;
 
 const EmblaSlide = styled("div")`
   position: relative;
-  min-width: 50%;
-  padding-left: 108px;
+  min-width: 40%;
+  padding-left: 50px;
 `;
 
 const EmblaSlideInner = styled(Card)`
@@ -59,6 +61,10 @@ const EmblaSlideInner = styled(Card)`
   height: 212px;
   width: 444px;
   margin: 0 auto;
+`;
+
+const EmblaUnselectedSlideInner = styled(EmblaSlideInner)`
+  transform: scale(0.8, 0.8);
 `;
 
 const EnblaSlideImage = styled(Image)`
@@ -89,6 +95,7 @@ const Carousel: React.FC = () => {
   });
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const scrollPrev = useCallback(() => embla && embla.scrollPrev(), [embla]);
   const scrollNext = useCallback(() => embla && embla.scrollNext(), [embla]);
@@ -96,6 +103,7 @@ const Carousel: React.FC = () => {
     if (!embla) return;
     setPrevBtnEnabled(embla.canScrollPrev());
     setNextBtnEnabled(embla.canScrollNext());
+    setSelectedIndex(embla.selectedScrollSnap());
   }, [embla]);
 
   useEffect(() => {
@@ -104,41 +112,45 @@ const Carousel: React.FC = () => {
     onSelect();
   }, [embla, onSelect]);
 
+  const hotSceneSpots = [
+    { img: banner04 },
+    { img: banner04 },
+    { img: banner04 },
+    { img: banner04 },
+    { img: banner04 },
+  ];
+
+  const renderSlide = (item, index) => {
+    return index === selectedIndex ? (
+      <EmblaSlide>
+        <EmblaSlideInner>
+          <EnblaSlideImage
+            src={banner04}
+            objectFit="cover"
+            objectPosition="center"
+            alt="search page banner"
+          />
+        </EmblaSlideInner>
+      </EmblaSlide>
+    ) : (
+      <EmblaSlide>
+        <EmblaUnselectedSlideInner>
+          <EnblaSlideImage
+            src={banner04}
+            objectFit="cover"
+            objectPosition="center"
+            alt="search page banner"
+          />
+        </EmblaUnselectedSlideInner>
+      </EmblaSlide>
+    );
+  };
   return (
     <>
       <Embla>
         <EmblaViewPort ref={viewportRef}>
           <EmblaContainer>
-            <EmblaSlide>
-              <EmblaSlideInner>
-                <EnblaSlideImage
-                  src={banner04}
-                  objectFit="cover"
-                  objectPosition="center"
-                  alt="search page banner"
-                />
-              </EmblaSlideInner>
-            </EmblaSlide>
-            <EmblaSlide>
-              <EmblaSlideInner>
-                <EnblaSlideImage
-                  src={banner04}
-                  objectFit="cover"
-                  objectPosition="center"
-                  alt="search page banner"
-                />
-              </EmblaSlideInner>
-            </EmblaSlide>
-            <EmblaSlide>
-              <EmblaSlideInner>
-                <EnblaSlideImage
-                  src={banner04}
-                  objectFit="cover"
-                  objectPosition="center"
-                  alt="search page banner"
-                />
-              </EmblaSlideInner>
-            </EmblaSlide>
+            {hotSceneSpots.map((item, index) => renderSlide(item, index))}
           </EmblaContainer>
         </EmblaViewPort>
 

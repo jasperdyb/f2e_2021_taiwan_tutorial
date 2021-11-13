@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import styled from "styled-components";
 import Head from "next/head";
 import Image from "next/image";
 import { useSceneSpots } from "services/sceneSpots";
@@ -21,7 +22,21 @@ import SortSelect from "components/SortSelect";
 import SearchPanelVertical from "components/SearchPanelVertical";
 import SceneInfoCard from "components/SceneInfoCard";
 import SceneInfoPagination from "components/SceneInfoPagination";
+import NavBreadCrumbs from "components/NavBreadCrumbs";
 import Footer from "components/Footer";
+
+const NavBreadCrumbContainer = styled("div")`
+  margin-top: 18px;
+  margin-bottom: 30px;
+`;
+
+const SceneSpotsTitle = styled(Typography)`
+  margin-bottom: 18px;
+`;
+
+const SceneSpotsCarouselContainer = styled("div")`
+  margin-bottom: 50px;
+`;
 
 const Search: NextPage = () => {
   const { spots } = useSceneSpots();
@@ -44,21 +59,22 @@ const Search: NextPage = () => {
         objectPosition="center"
       />
       <Container>
-        <Breadcrumbs
-          aria-label="breadcrumb"
-          separator={<NavigateNextIcon fontSize="small" />}
-        >
-          <Link underline="hover" color="inherit" href="/">
-            首頁
-          </Link>
-          <Typography color="info.main">景點查詢</Typography>
-        </Breadcrumbs>
-        <Typography color="info.main">熱門景點</Typography>
-        <Carousel />
+        <NavBreadCrumbContainer>
+          <NavBreadCrumbs />
+        </NavBreadCrumbContainer>
+
+        <SceneSpotsTitle typography={"h1"} color="info.main">
+          熱門景點
+        </SceneSpotsTitle>
+        <SceneSpotsCarouselContainer>
+          <Carousel />
+        </SceneSpotsCarouselContainer>
+
         <Stack
           direction="row"
           justifyContent="space-between"
           alignItems="center"
+          paddingBottom={"30px"}
         >
           <SearchAutoComplete />
           <SortSelect />
@@ -81,8 +97,8 @@ const Search: NextPage = () => {
 
       <Footer color={"secondary"}>
         <Typography>
-          TaiwanTravel © 2021 Designer Vum. Engineer [enter your name]. All
-          rights reserved.
+          TaiwanTravel © 2021 Designer Vum. Engineer Jasper Chen. All rights
+          reserved.
         </Typography>
       </Footer>
     </>

@@ -1,19 +1,40 @@
 import React from "react";
 import styled from "styled-components";
-import { styled as muiStyled } from "@mui/material/styles";
+// import { styled } from "@mui/material/styles";
 
+import Card from "@mui/material/Card";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+
+const CustomAutoComplete = styled(Autocomplete)`
+  & .MuiAutocomplete-popupIndicatorOpen {
+    transform: unset;
+  }
+
+  & .MuiAutocomplete-popupIndicator {
+    color: #7baebe;
+  }
+
+  & .MuiOutlinedInput-notchedOutline {
+    border: none;
+  }
+`;
 
 const SearchAutoComplete: React.FC = () => {
   return (
-    <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={top100Films}
-      sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
-    />
+    <Card raised>
+      <CustomAutoComplete
+        disablePortal
+        id="combo-box-demo"
+        options={top100Films}
+        sx={{ width: 300 }}
+        renderInput={(params) => (
+          <TextField {...params} placeholder="關鍵字查詢" />
+        )}
+        popupIcon={<SearchIcon />}
+      />
+    </Card>
   );
 };
 
