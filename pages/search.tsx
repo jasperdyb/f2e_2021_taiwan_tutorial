@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useSceneSpots } from "services/sceneSpots";
 
 import Container from "@mui/material/Container";
-import Navbar from "components/Navbar";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
@@ -15,12 +14,14 @@ import Grid from "@mui/material/Grid";
 
 import banner04 from "public/img/banner04.jpg";
 
+import Navbar from "components/Navbar";
 import Carousel from "components/Carousel";
 import SearchAutoComplete from "components/SearchAutoComplete";
 import SortSelect from "components/SortSelect";
 import SearchPanelVertical from "components/SearchPanelVertical";
 import SceneInfoCard from "components/SceneInfoCard";
 import SceneInfoPagination from "components/SceneInfoPagination";
+import Footer from "components/Footer";
 
 const Search: NextPage = () => {
   const { spots } = useSceneSpots();
@@ -67,12 +68,23 @@ const Search: NextPage = () => {
             <SearchPanelVertical />
           </Grid>
           <Grid item xs={8}>
-            <SceneInfoCard />
-
+            <Stack spacing={"44px"} marginBottom={"70px"}>
+              <SceneInfoCard />
+              <SceneInfoCard />
+              <SceneInfoCard />
+              <SceneInfoCard />
+            </Stack>
             <SceneInfoPagination />
           </Grid>
         </Grid>
       </Container>
+
+      <Footer color={"secondary"}>
+        <Typography>
+          TaiwanTravel © 2021 Designer Vum. Engineer [enter your name]. All
+          rights reserved.
+        </Typography>
+      </Footer>
     </>
   );
 };

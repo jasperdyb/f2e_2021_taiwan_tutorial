@@ -36,9 +36,12 @@ const Navbar: React.FC<Props> = ({ color }) => {
   return (
     <CustomAppBar color={color} position="sticky">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          TAIWAN TRAVEL
-        </Typography>
+        <Link href={"/"} passHref>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            TAIWAN TRAVEL
+          </Typography>
+        </Link>
+
         {menu.map((item, index) => (
           <Link key={index} href={item.link} passHref>
             <Button color="inherit">{item.title}</Button>
