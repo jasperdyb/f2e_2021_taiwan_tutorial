@@ -1,9 +1,12 @@
 import axios from "axios";
 import jsSHA from "jssha";
 import useSWR from "swr";
+import apiList from "services/_api";
+
+import { SceneSpotDataType } from "types/sceneSpots";
 
 const instance = axios.create({
-  baseURL: "https://ptx.transportdata.tw/MOTC/v2",
+  baseURL: "/",
   timeout: 1000,
   headers: getAuthorizationHeader(),
 });
@@ -19,23 +22,26 @@ function getAuthorizationHeader() {
   ShaObj.update("x-date: " + GMTString);
   let HMAC = ShaObj.getHMAC("B64");
   let Authorization =
-    'hmac username="' +
-    AppID +
-    '", algorithm="hmac-sha1", headers="x-date", signature="' +
-    HMAC +
-    '"';
+    AppID && HMAC
+      ? `hmac username="${AppID}", algorithm="hmac-sha1", headers="x-date", signature="${HMAC}"`
+      : null;
+
+  console.log("==== Authorization ===", Authorization);
   return { Authorization: Authorization, "X-Date": GMTString };
 }
 
 const fetcher = (url: string) => instance.get(url).then((res) => res.data);
+const postFetcher = (url: string) => instance.get(url).then((res) => res.data);
 
 // const fetcher = instance.get("Rail/TRA/Station?$top=10&$format=JSON");
 
-export function useSceneSpots() {
-  const { data, error } = useSWR(
-    `Rail/TRA/Station?$top=10&$format=JSON`,
-    fetcher
-  );
+export function useGetSceneSpots(City: string = "Taipei"): {
+  spots: Array<SceneSpotDataType>;
+  isLoading: boolean;
+  isError: boolean;
+} {
+  console.log("==== useGetSceneSpots ===");
+  const { data, error } = useSWR(apiList.ScenicSpots(City), fetcher);
 
   return {
     spots: data,

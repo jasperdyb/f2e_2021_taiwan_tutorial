@@ -36,14 +36,31 @@ const CustomPagination = styled(Pagination)`
   }
 `;
 
-const SceneInfoPagination: React.FC = () => {
-  const theme = useTheme();
+interface Props {
+  page: number;
+  dataLength: number;
+  onChange: (event: React.ChangeEvent<unknown>, page: number) => void;
+}
+
+const SceneInfoPagination: React.FC<Props> = ({
+  page,
+  dataLength,
+  onChange,
+}) => {
+  const [count, setCount] = React.useState(1);
+
+  React.useEffect(() => {
+    setCount(Math.ceil(dataLength / process.env.NUMBER_PER_PAGE));
+  }, [dataLength]);
+
   return (
     <CustomPagination
       size="large"
-      count={10}
+      page={page}
+      count={count}
       variant="outlined"
       shape="rounded"
+      onChange={onChange}
     />
   );
 };

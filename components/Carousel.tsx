@@ -122,7 +122,7 @@ const Carousel: React.FC = () => {
 
   const renderSlide = (item, index) => {
     return index === selectedIndex ? (
-      <EmblaSlide>
+      <EmblaSlide key={index}>
         <EmblaSlideInner>
           <EnblaSlideImage
             src={banner04}
@@ -133,7 +133,7 @@ const Carousel: React.FC = () => {
         </EmblaSlideInner>
       </EmblaSlide>
     ) : (
-      <EmblaSlide>
+      <EmblaSlide key={index}>
         <EmblaUnselectedSlideInner>
           <EnblaSlideImage
             src={banner04}

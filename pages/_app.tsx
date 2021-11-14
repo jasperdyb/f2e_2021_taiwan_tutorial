@@ -43,6 +43,7 @@ const mainTheme = createTheme({
       "sans-serif",
     ].join(","),
     fontSize: 14,
+
     h1: {
       fontSize: "22px",
       letterSpacing: "1.54px",

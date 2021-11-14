@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import styled from "styled-components";
 import Head from "next/head";
 import Image from "next/image";
-import { useSceneSpots } from "services/sceneSpots";
+import { useGetSceneSpots } from "services/sceneSpots";
 
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -25,6 +26,8 @@ import SceneInfoPagination from "components/SceneInfoPagination";
 import NavBreadCrumbs from "components/NavBreadCrumbs";
 import Footer from "components/Footer";
 
+import { SceneSpotDataType } from "types/sceneSpots";
+
 const NavBreadCrumbContainer = styled("div")`
   margin-top: 18px;
   margin-bottom: 30px;
@@ -39,9 +42,24 @@ const SceneSpotsCarouselContainer = styled("div")`
 `;
 
 const Search: NextPage = () => {
-  const { spots } = useSceneSpots();
+  const [page, setPage] = useState(1);
+  const [pageData, setPageData] = useState<Array<SceneSpotDataType>>([]);
+  const { spots } = useGetSceneSpots();
 
-  console.log(spots);
+  useEffect(() => {
+    if (spots)
+      setPageData(
+        spots.slice(
+          process.env.NUMBER_PER_PAGE * (page - 1),
+          process.env.NUMBER_PER_PAGE * page
+        )
+      );
+  }, [page, spots]);
+
+  useEffect(() => {
+    console.log("==== page ===", page);
+    console.log("==== pageData ===", pageData);
+  }, [pageData]);
 
   return (
     <>
@@ -85,16 +103,18 @@ const Search: NextPage = () => {
           </Grid>
           <Grid item xs={8}>
             <Stack spacing={"44px"} marginBottom={"70px"}>
-              <SceneInfoCard />
-              <SceneInfoCard />
-              <SceneInfoCard />
-              <SceneInfoCard />
+              {pageData.map((data) => (
+                <SceneInfoCard key={String(data.ID)} sceneSpotData={data} />
+              ))}
             </Stack>
-            <SceneInfoPagination />
+            <SceneInfoPagination
+              page={page}
+              dataLength={spots ? spots.length : 1}
+              onChange={(e, page) => setPage(page)}
+            />
           </Grid>
         </Grid>
       </Container>
-
       <Footer color={"secondary"}>
         <Typography>
           TaiwanTravel © 2021 Designer Vum. Engineer Jasper Chen. All rights

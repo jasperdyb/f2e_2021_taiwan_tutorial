@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-  webpack: (config, options) => {
-    // config.module.rules.push({
-    //   test: /\.svg$/,
-    //   use: ["@svgr/webpack"],
-    // });
+  env: {
+    NUMBER_PER_PAGE: 10,
+  },
 
-    return config;
+  images: {
+    domains: ["www.travel.taipei"],
   },
 };

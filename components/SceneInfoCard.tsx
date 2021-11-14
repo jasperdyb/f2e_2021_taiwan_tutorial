@@ -21,88 +21,131 @@ import Chip from "@mui/material/Chip";
 import RoomIcon from "@mui/icons-material/Room";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import TouchAppIcon from "@mui/icons-material/TouchApp";
+import Tooltip from "@mui/material/Tooltip";
 
 import banner04 from "public/img/banner04.jpg";
+
+import { SceneSpotDataType } from "types/sceneSpots";
 
 const SceneTypeChip = styled(Chip)`
   color: #fff;
 `;
 
-const SceneInfoCard: React.FC = () => {
+const Description = styled("div")`
+  height: 100px;
+`;
+
+const OpenTimeContainer = styled("div")`
+  max-width: 150px;
+  text-overflow: ellipsis;
+`;
+
+interface Props {
+  sceneSpotData: SceneSpotDataType;
+}
+
+const SceneInfoCard: React.FC<Props> = ({ sceneSpotData }) => {
   const theme = useTheme();
   return (
-    <Card raised>
-      <CardActionArea>
-        <Grid direction="row" container>
-          <Grid item xs={5}>
-            <div
-              style={{
-                position: "relative",
-                height: "240px",
-                width: "100%",
-              }}
-            >
-              <Image
-                src={banner04}
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center"
-                alt="search page banner"
-              />
-            </div>
-          </Grid>
-          <Grid
-            item
-            xs={7}
-            container
-            direction="column"
-            padding="18px"
-            rowSpacing={"8px"}
-          >
-            <Grid item>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignContent={"center"}
+    <>
+      {sceneSpotData && (
+        <Card raised>
+          <CardActionArea>
+            <Grid direction="row" container>
+              <Grid item xs={5}>
+                <div
+                  style={{
+                    position: "relative",
+                    height: "240px",
+                    width: "100%",
+                  }}
+                >
+                  <Image
+                    src={sceneSpotData.Picture.PictureUrl1}
+                    layout="fill"
+                    objectFit="cover"
+                    objectPosition="center"
+                    alt="search page banner"
+                  />
+                </div>
+              </Grid>
+              <Grid
+                item
+                xs={7}
+                container
+                direction="column"
+                padding="18px"
+                rowSpacing={"8px"}
               >
-                <Typography typography={"h1"} color="info.main">
-                  紫坪
-                </Typography>
-                <SceneTypeChip label="自然風景" color="primary" />
-              </Stack>
-            </Grid>
-            <Grid item flex={1}>
-              <Typography color="grey.600">
-                帆船鼻位於綠島東南角，有「綠島地毯」之稱，可由朝日溫泉售票口旁邊的小徑沿步道而上。由於地形突出，地勢又高出四周，屬東北季季風可長驅直入的衝風帶；再加上後天的放牧
-                ......
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Stack direction="row" justifyContent="space-between">
-                <Stack direction="row" spacing={2}>
-                  <Stack direction="row" alignItems={"center"} spacing={"7px"}>
-                    <RoomIcon color="info" fontSize="small" />
-                    <Typography typography={"subtitle1"} color="grey.600">
-                      臺東縣綠島鄉
+                <Grid item>
+                  <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignContent={"center"}
+                  >
+                    <Typography typography={"h1"} color="info.main">
+                      {sceneSpotData.Name.split("_").pop()}
                     </Typography>
+                    <SceneTypeChip
+                      label={sceneSpotData.Class1}
+                      color="primary"
+                    />
                   </Stack>
-                  <Stack direction="row" alignItems={"center"} spacing={"7px"}>
-                    <WatchLaterIcon color="info" fontSize="small" />
-                    <Typography typography={"subtitle1"} color="grey.600">
-                      全天開放
+                </Grid>
+                <Grid item flex={1}>
+                  <Description>
+                    <Typography color="grey.600" paragraph>
+                      {`${sceneSpotData.DescriptionDetail.slice(0, 75)} ...`}
                     </Typography>
+                  </Description>
+                </Grid>
+                <Grid item>
+                  <Stack direction="row" justifyContent="space-between">
+                    <Stack direction="row" spacing={2}>
+                      <Stack
+                        direction="row"
+                        alignItems={"center"}
+                        spacing={"7px"}
+                      >
+                        <RoomIcon color="info" fontSize="small" />
+                        <Typography typography={"subtitle1"} color="grey.600">
+                          {sceneSpotData.City}
+                        </Typography>
+                      </Stack>
+                      <Stack
+                        direction="row"
+                        alignItems={"center"}
+                        spacing={"7px"}
+                      >
+                        <WatchLaterIcon color="info" fontSize="small" />
+                        <OpenTimeContainer>
+                          <Tooltip
+                            title={sceneSpotData.OpenTime}
+                            placement="top"
+                          >
+                            <Typography
+                              typography={"subtitle1"}
+                              color="grey.600"
+                              noWrap
+                            >
+                              {sceneSpotData.OpenTime}
+                            </Typography>
+                          </Tooltip>
+                        </OpenTimeContainer>
+                      </Stack>
+                    </Stack>
+                    <Stack direction="row" alignItems={"center"}>
+                      <TouchAppIcon color="primary" fontSize="small" />
+                      <Typography color="grey.600">1234</Typography>
+                    </Stack>
                   </Stack>
-                </Stack>
-                <Stack direction="row" alignItems={"center"}>
-                  <TouchAppIcon color="primary" fontSize="small" />
-                  <Typography color="grey.600">1234</Typography>
-                </Stack>
-              </Stack>
+                </Grid>
+              </Grid>
             </Grid>
-          </Grid>
-        </Grid>
-      </CardActionArea>
-    </Card>
+          </CardActionArea>
+        </Card>
+      )}
+    </>
   );
 };
 export default SceneInfoCard;

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 
-import { useSceneSpots } from "services/sceneSpots";
+import { useGetSceneSpots } from "services/sceneSpots";
 import Background from "components/Background";
 import Navbar from "components/Navbar";
 import SearchPanel from "components/SearchPanel";
@@ -15,10 +15,6 @@ import banner01 from "public/img/banner01.jpg";
 import taiwan_logo_white from "public/svg/taiwan_logo_white.svg";
 
 const Home: NextPage = () => {
-  const { spots } = useSceneSpots();
-
-  console.log(spots);
-
   return (
     <>
       <Head>
