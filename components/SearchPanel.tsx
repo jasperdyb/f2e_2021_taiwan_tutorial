@@ -25,8 +25,8 @@ const SearchButton = styled(Button)`
 `;
 
 const SearchPanel: React.FC = () => {
-  const [region, setRegion] = useState("10");
-  const [city, setCity] = useState("30");
+  const [region, setRegion] = useState(10);
+  const [city, setCity] = useState(30);
 
   const regionSelections = [
     {
@@ -74,7 +74,7 @@ const SearchPanel: React.FC = () => {
                 selections={regionSelections}
                 value={region}
                 onChange={(event: SelectChangeEvent<unknown>) => {
-                  setRegion(event.target.value as string);
+                  setRegion(event.target.value);
                 }}
               />
             </Grid>
@@ -83,7 +83,7 @@ const SearchPanel: React.FC = () => {
                 selections={citySelections}
                 value={region}
                 onChange={(event: SelectChangeEvent<unknown>) => {
-                  setCity(event.target.value as string);
+                  setCity(event.target.value);
                 }}
               />
             </Grid>
