@@ -14,7 +14,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 
-import banner04 from "public/img//banner04.jpg";
+import banner04 from "public/img//Banner04.jpg";
 
 import Navbar from "components/Navbar";
 import Carousel from "components/Carousel";
