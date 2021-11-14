@@ -1,5 +1,5 @@
 import * as React from "react";
-import banner01 from "../public/img//banner01.jpg";
+import banner01 from "public/img//banner01.jpg";
 import Image from "next/image";
 import { useState } from "react";
 import { ImageProps } from "next/image";

@@ -11,8 +11,8 @@ import SearchPanel from "components/SearchPanel";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
-import banner01 from "../public/img//banner01.jpg";
-import taiwan_logo_white from "../public/svg//taiwan_logo_white.svg";
+import banner01 from "public/img//banner01.jpg";
+import taiwan_logo_white from "public/svg//taiwan_logo_white.svg";
 
 const Home: NextPage = () => {
   return (

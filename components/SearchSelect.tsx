@@ -7,7 +7,7 @@ import Icon from "@mui/material/Icon";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
-import slideMenuArrowSvg from "../public/icon//slideMenuArrow.svg";
+import slideMenuArrowSvg from "public/icon//slideMenuArrow.svg";
 
 const SearchPanelSelect = styled(Select)`
   min-width: 270px;
