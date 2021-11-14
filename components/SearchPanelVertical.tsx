@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
 
@@ -21,6 +21,9 @@ import FormControl from "@mui/material/FormControl";
 import SearchPanelTypeList from "components/SearchPanelTypeList";
 import SearchSelect from "components/SearchSelect";
 
+import { RegionOptions, CityOptions } from "types/sceneSpots";
+import { useSceneSpotContext } from "context/sceneSpot";
+
 const FilterTypography = styled(Typography)`
   margin-bottom: 16px;
 `;
@@ -39,8 +42,25 @@ const SearchButton = styled(Button)`
 `;
 
 const SearchPanelVertical: React.FC = () => {
-  const [region, setRegion] = useState("10");
-  const [city, setCity] = useState("30");
+  const [region, setRegion] = useState(10);
+  const [citySelections, setCitySelections] = useState<
+    Array<{
+      title: string;
+      value: number;
+    }>
+  >([]);
+  const { city, setCity } = useSceneSpotContext();
+
+  useEffect(() => {
+    const options = CityOptions.filter((city) => {
+      return city.region === region;
+    });
+    setCitySelections(options);
+
+    if (options && options.length) {
+      setCity(options[0].value);
+    }
+  }, [region]);
 
   return (
     <Card raised>
@@ -54,19 +74,19 @@ const SearchPanelVertical: React.FC = () => {
           </Grid>
           <Grid item>
             <SearchSelect
-              selections={regionSelections}
+              selections={RegionOptions}
               value={region}
               onChange={(event: SelectChangeEvent<unknown>) => {
-                setRegion(event.target.value as string);
+                setRegion(event.target.value as number);
               }}
             />
           </Grid>
           <Grid item>
             <SearchSelect
               selections={citySelections}
-              value={region}
+              value={city}
               onChange={(event: SelectChangeEvent<unknown>) => {
-                setCity(event.target.value as string);
+                setCity(event.target.value as number);
               }}
             />
           </Grid>
@@ -86,33 +106,4 @@ const SearchPanelVertical: React.FC = () => {
   );
 };
 
-const regionSelections = [
-  {
-    title: "北部地區",
-    value: 10,
-  },
-  {
-    title: "中部地區",
-    value: 20,
-  },
-  {
-    title: "南部地區",
-    value: 30,
-  },
-];
-
-const citySelections = [
-  {
-    title: "台北市",
-    value: 10,
-  },
-  {
-    title: "台中市",
-    value: 20,
-  },
-  {
-    title: "台南市",
-    value: 30,
-  },
-];
 export default SearchPanelVertical;

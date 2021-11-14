@@ -6,6 +6,11 @@ module.exports = {
   },
 
   images: {
-    domains: ["www.travel.taipei"],
+    domains: [
+      "www.travel.taipei",
+      "www.northguan-nsa.gov.tw",
+      "newtaipei.travel",
+      "www.trimt-nsa.gov.tw",
+    ],
   },
 };

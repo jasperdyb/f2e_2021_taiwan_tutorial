@@ -36,7 +36,7 @@ const SearchMenuItem = styled(MenuItem)`
 `;
 
 interface Props {
-  value: string;
+  value: number;
   selections: Array<{
     title: string;
     value: number;

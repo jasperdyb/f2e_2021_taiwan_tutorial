@@ -1,4 +1,5 @@
 import type { AppProps } from "next/app";
+import { useContext, createContext } from "react";
 import { createGlobalStyle } from "styled-components";
 import CssBaseline from "@mui/material/CssBaseline";
 import {
@@ -7,6 +8,7 @@ import {
   ThemeProvider,
   darken,
 } from "@mui/material/styles";
+import { SceneSpotContextProvider } from "context/sceneSpot";
 
 const GlobalStyle = createGlobalStyle`
 html{ 
@@ -81,7 +83,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <CssBaseline />
       <GlobalStyle />
       <ThemeProvider theme={mainTheme}>
-        <Component {...pageProps} />
+        <SceneSpotContextProvider>
+          <Component {...pageProps} />
+        </SceneSpotContextProvider>
       </ThemeProvider>
     </>
   );

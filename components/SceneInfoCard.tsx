@@ -23,9 +23,11 @@ import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import TouchAppIcon from "@mui/icons-material/TouchApp";
 import Tooltip from "@mui/material/Tooltip";
 
-import banner04 from "public/img/banner04.jpg";
+import banner01 from "public/img/banner01.jpg";
 
 import { SceneSpotDataType } from "types/sceneSpots";
+
+import ImageWithFallback from "components/ImageWithFallback";
 
 const SceneTypeChip = styled(Chip)`
   color: #fff;
@@ -46,6 +48,7 @@ interface Props {
 
 const SceneInfoCard: React.FC<Props> = ({ sceneSpotData }) => {
   const theme = useTheme();
+
   return (
     <>
       {sceneSpotData && (
@@ -60,8 +63,12 @@ const SceneInfoCard: React.FC<Props> = ({ sceneSpotData }) => {
                     width: "100%",
                   }}
                 >
-                  <Image
-                    src={sceneSpotData.Picture.PictureUrl1}
+                  <ImageWithFallback
+                    src={
+                      typeof sceneSpotData.Picture.PictureUrl1 === "string"
+                        ? sceneSpotData.Picture.PictureUrl1
+                        : banner01
+                    }
                     layout="fill"
                     objectFit="cover"
                     objectPosition="center"

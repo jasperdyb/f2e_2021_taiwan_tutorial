@@ -4,6 +4,8 @@ import useSWR from "swr";
 import apiList from "services/_api";
 
 import { SceneSpotDataType } from "types/sceneSpots";
+import { useSceneSpotContext } from "context/sceneSpot";
+import { CityOptions } from "types/sceneSpots";
 
 const instance = axios.create({
   baseURL: "/",
@@ -41,7 +43,12 @@ export function useGetSceneSpots(City: string = "Taipei"): {
   isError: boolean;
 } {
   console.log("==== useGetSceneSpots ===");
-  const { data, error } = useSWR(apiList.ScenicSpots(City), fetcher);
+
+  const { city } = useSceneSpotContext();
+  const selectedCity = CityOptions.find((c) => c.value === city)?.searchString;
+  console.log("==== selectedCity ===", selectedCity);
+
+  const { data, error } = useSWR(apiList.ScenicSpots(selectedCity), fetcher);
 
   return {
     spots: data,
