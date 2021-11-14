@@ -67,43 +67,43 @@ export interface SceneSpotSearchOptions {
 
 export interface SceneSpotDataType {
   ID: String; //
-  Name: String; // optional
-  DescriptionDetail: String; // optional
-  Description: String; // optional
-  Phone: String; // optional
-  Address: String; // optional
-  ZipCode: String; // optional
-  TravelInfo: String; // optional
-  OpenTime: String; // optional
-  Picture: TourismPicture; // optional
-  MapUrl: String; // optional
-  Position: PointType; // optional
-  Class1: String; // optional
-  Class2: String; // optional
-  Class3: String; // optional
-  Level: String; // optional
-  WebsiteUrl: String; // optional
-  ParkingInfo: String; // optional
-  ParkingPosition: PointType; // optional
-  TicketInfo: String; // optional
-  Remarks: String; // optional
-  Keyword: String; // optional
-  City: String; // optional
-  SrcUpdateTime: Date; //
-  UpdateTime: Date; //
+  Name?: String; // optional
+  DescriptionDetail?: String; // optional
+  Description?: String; // optional
+  Phone?: String; // optional
+  Address?: String; // optional
+  ZipCode?: String; // optional
+  TravelInfo?: String; // optional
+  OpenTime?: String; // optional
+  Picture?: TourismPicture; // optional
+  MapUrl?: String; // optional
+  Position?: PointType; // optional
+  Class1?: String; // optional
+  Class2?: String; // optional
+  Class3?: String; // optional
+  Level?: String; // optional
+  WebsiteUrl?: String; // optional
+  ParkingInfo?: String; // optional
+  ParkingPosition?: PointType; // optional
+  TicketInfo?: String; // optional
+  Remarks?: String; // optional
+  Keyword?: String; // optional
+  City?: String; // optional
+  SrcUpdateTime: String; //
+  UpdateTime: String; //
 }
 
 interface TourismPicture {
-  PictureUrl1: String; //, optional): // 照片連結網址1 ,
-  PictureDescription1: String; //, optional): // 照片說明1 ,
-  PictureUrl2: String; //, optional): // 照片連結網址2 ,
-  PictureDescription2: String; //, optional): // 照片說明2 ,
-  PictureUrl3: String; //, optional): // 照片連結網址3 ,
-  PictureDescription3: String; //, optional): // 照片說明3
+  PictureUrl1?: String; //, optional): // 照片連結網址1 ,
+  PictureDescription1?: String; //, optional): // 照片說明1 ,
+  PictureUrl2?: String; //, optional): // 照片連結網址2 ,
+  PictureDescription2?: String; //, optional): // 照片說明2 ,
+  PictureUrl3?: String; //, optional): // 照片連結網址3 ,
+  PictureDescription3?: String; //, optional): // 照片說明3
 }
 
 interface PointType {
-  PositionLon: number; //, optional): 位置經度(WGS84) ,
-  PositionLat: number; //, optional): 位置緯度(WGS84) ,
-  GeoHash: String; //, optional): 地理空間編碼
+  PositionLon?: number; //, optional): 位置經度(WGS84) ,
+  PositionLat?: number; //, optional): 位置緯度(WGS84) ,
+  GeoHash?: String; //, optional): 地理空間編碼
 }
