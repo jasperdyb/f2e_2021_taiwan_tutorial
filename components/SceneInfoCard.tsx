@@ -23,7 +23,7 @@ import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import TouchAppIcon from "@mui/icons-material/TouchApp";
 import Tooltip from "@mui/material/Tooltip";
 
-import banner01 from "@img/banner01.jpg";
+import banner01 from "../public/img//banner01.jpg";
 
 import { SceneSpotDataType } from "types/sceneSpots";
 

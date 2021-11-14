@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import banner01 from "@img/banner01.jpg";
+import banner01 from "../public/img//banner01.jpg";
 import Image from "next/image";
 import styled from "styled-components";
 import Card from "@mui/material/Card";
