@@ -34,9 +34,6 @@ function getAuthorizationHeader() {
 
 const fetcher = (url: string, $top: number, $orderby: String) =>
   instance.get(url, { params: { $top, $orderby } }).then((res) => res.data);
-const postFetcher = (url: string) => instance.get(url).then((res) => res.data);
-
-// const fetcher = instance.get("Rail/TRA/Station?$top=10&$format=JSON");
 
 export function useGetSceneSpots(
   City = "Taipei",
@@ -58,6 +55,22 @@ export function useGetSceneSpots(
     null,
     fetcher
   );
+
+  return {
+    spots: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
+
+export function useGetTopSceneSpots(): {
+  spots: Array<SceneSpotDataType>;
+  isLoading: boolean;
+  isError: boolean;
+} {
+  console.log("==== useGetSceneSpots ===");
+
+  const { data, error } = useSWR([apiList.ScenicSpots(), 10], fetcher);
 
   return {
     spots: data,

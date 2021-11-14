@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
+import { useForm, Controller } from "react-hook-form";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -42,8 +43,31 @@ const SearchButton = styled(Button)`
 `;
 
 const SearchPanelVertical: React.FC = () => {
-  const { region, setRegion, city, setCity, citySelections } =
-    useSceneSpotContext();
+  const [citySelections, setCitySelections] = useState<
+    Array<{
+      title: string;
+      value: number;
+    }>
+  >([]);
+
+  const { region, setRegion, city, setCity } = useSceneSpotContext();
+
+  const { handleSubmit, formState, setValue, control } = useForm<{
+    region: String;
+    city: String;
+    type?: String;
+  }>();
+
+  useEffect(() => {
+    const options = CityOptions.filter((city) => {
+      return city.region === region;
+    });
+    setCitySelections(options);
+
+    if (options && options.length) {
+      setValue("city", options[0].value);
+    }
+  }, [region]);
 
   return (
     <Card raised>
@@ -56,21 +80,43 @@ const SearchPanelVertical: React.FC = () => {
             </Typography>
           </Grid>
           <Grid item>
-            <SearchSelect
-              selections={RegionOptions}
-              value={region}
-              onChange={(event: SelectChangeEvent<unknown>) => {
-                setRegion(event.target.value as number);
-              }}
+            <Controller
+              name="region"
+              control={control}
+              defaultValue={RegionOptions[0].value}
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { invalid, isTouched, isDirty, error },
+                formState,
+              }) => (
+                <SearchSelect
+                  selections={RegionOptions}
+                  value={value}
+                  onChange={(event: SelectChangeEvent<unknown>) => {
+                    onChange(event.target.value);
+                  }}
+                />
+              )}
             />
           </Grid>
           <Grid item>
-            <SearchSelect
-              selections={citySelections}
-              value={city}
-              onChange={(event: SelectChangeEvent<unknown>) => {
-                setCity(event.target.value as number);
-              }}
+            <Controller
+              name="city"
+              control={control}
+              defaultValue={CityOptions[0].value}
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { invalid, isTouched, isDirty, error },
+                formState,
+              }) => (
+                <SearchSelect
+                  selections={citySelections}
+                  value={value}
+                  onChange={(event: SelectChangeEvent<unknown>) => {
+                    onChange(event.target.value);
+                  }}
+                />
+              )}
             />
           </Grid>
         </FilterGrid>
