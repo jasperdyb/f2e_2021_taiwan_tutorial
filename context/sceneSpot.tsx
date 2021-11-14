@@ -49,17 +49,6 @@ export const SceneSpotContextProvider: React.FC = (props) => {
   const [type, setType] = useState<string>();
 
   useEffect(() => {
-    const options = CityOptions.filter((city) => {
-      return city.region === region;
-    });
-    setCitySelections(options);
-
-    if (options && options.length) {
-      setCity(options[0].value);
-    }
-  }, [region]);
-
-  useEffect(() => {
     setPage(1);
   }, [city]);
 

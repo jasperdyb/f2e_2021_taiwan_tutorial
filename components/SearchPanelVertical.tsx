@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, useWatch, Controller } from "react-hook-form";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -42,6 +42,12 @@ const SearchButton = styled(Button)`
   height: 50px;
 `;
 
+interface sceneSearchFormType {
+  region: number;
+  city: number;
+  type?: String;
+}
+
 const SearchPanelVertical: React.FC = () => {
   const [citySelections, setCitySelections] = useState<
     Array<{
@@ -50,13 +56,20 @@ const SearchPanelVertical: React.FC = () => {
     }>
   >([]);
 
-  const { region, setRegion, city, setCity } = useSceneSpotContext();
+  const { setRegion, city, setCity } = useSceneSpotContext();
 
-  const { handleSubmit, formState, setValue, control } = useForm<{
-    region: String;
-    city: String;
-    type?: String;
-  }>();
+  const { handleSubmit, formState, watch, setValue, control } =
+    useForm<sceneSearchFormType>();
+
+  const region = useWatch({
+    control,
+    name: "region",
+    defaultValue: RegionOptions[0].value,
+  });
+
+  const onSubmit = (data: sceneSearchFormType) => {
+    setCity(data.city);
+  };
 
   useEffect(() => {
     const options = CityOptions.filter((city) => {
@@ -126,7 +139,11 @@ const SearchPanelVertical: React.FC = () => {
         </Typography>
         <SearchPanelTypeList />
         <Stack direction={"row"} justifyContent={"center"}>
-          <SearchButton disableElevation variant="contained">
+          <SearchButton
+            disableElevation
+            variant="contained"
+            onClick={handleSubmit(onSubmit)}
+          >
             Search
           </SearchButton>
         </Stack>

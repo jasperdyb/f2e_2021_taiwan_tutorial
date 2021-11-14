@@ -51,8 +51,8 @@ export function useGetSceneSpots(
   const top = 10;
 
   const { data, error } = useSWR(
-    // [apiList.ScenicSpots(City), options.$top, options.$orderby],
-    null,
+    [apiList.ScenicSpots(City), options.$top, options.$orderby],
+    // null,
     fetcher
   );
 
