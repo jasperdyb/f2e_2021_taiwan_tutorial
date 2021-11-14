@@ -35,7 +35,12 @@ interface sceneSearchFormType {
 
 const SearchPanel: React.FC = () => {
   const router = useRouter();
-  const { region, city, setCity, setType } = useSceneSpotContext();
+  const { region, city, setRegion, setCity, setType } = useSceneSpotContext();
+  console.log("===  SearchPanel useSceneSpotContext ===", {
+    region,
+    city,
+  });
+
   const { handleSubmit, watch, setValue, control } =
     useForm<sceneSearchFormType>({
       defaultValues: {
@@ -51,6 +56,7 @@ const SearchPanel: React.FC = () => {
   >([]);
 
   const onSubmit: SubmitHandler<sceneSearchFormType> = (data) => {
+    setRegion(data.region);
     setCity(data.city);
     setType(null);
 

@@ -57,7 +57,12 @@ const SearchPanelVertical: React.FC = () => {
     }>
   >([]);
 
-  const { region, city, type, setCity, setType } = useSceneSpotContext();
+  const { region, city, type, setRegion, setCity, setType } =
+    useSceneSpotContext();
+  console.log("===  SearchPanelVertical useSceneSpotContext ===", {
+    region,
+    city,
+  });
 
   const { handleSubmit, watch, setValue, control } =
     useForm<sceneSearchFormType>({
@@ -71,6 +76,7 @@ const SearchPanelVertical: React.FC = () => {
   const formRegion = watch("region", RegionOptions[0].value);
 
   const onSubmit: SubmitHandler<sceneSearchFormType> = (data) => {
+    setRegion(data.region);
     setCity(data.city);
     setType(data.type);
   };
@@ -85,6 +91,11 @@ const SearchPanelVertical: React.FC = () => {
       setValue("city", options[0].value);
     }
   }, [formRegion]);
+
+  useEffect(() => {
+    setRegion(10);
+    setCity(10);
+  }, []);
 
   return (
     <Card raised>
