@@ -13,25 +13,33 @@ import { SceneTypeOptions } from "types/sceneSpots";
 
 const CustomDiv = styled("div")``;
 
-const SearchPanelTypeList: React.FC = () => {
+interface Props {
+  options: Array<{
+    value: String | null;
+    label: String;
+  }>;
+  value: String;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>, value: string) => void;
+}
+
+const SearchPanelTypeList: React.FC<Props> = ({ options, value, onChange }) => {
   return (
     <FormControl component="fieldset">
       <RadioGroup
         aria-label="gender"
         defaultValue="female"
         name="radio-buttons-group"
+        value={value}
+        onChange={onChange}
       >
-        <Grid container>
-          {SceneTypeOptions.map((item, index) => (
-            <Grid item key={index} xs={12}>
-              <FormControlLabel
-                value={item.value}
-                control={<Radio />}
-                label={item.label}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        {options.map((item, index) => (
+          <FormControlLabel
+            key={index}
+            value={item.value}
+            control={<Radio />}
+            label={item.label}
+          />
+        ))}
       </RadioGroup>
     </FormControl>
   );

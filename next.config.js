@@ -15,6 +15,7 @@ module.exports = {
       "www.eastcoast-nsa.gov.tw",
       "www.ali-nsa.net",
       "tourism.chcg.gov.tw",
+      "cloud.culture.tw",
     ],
   },
 };

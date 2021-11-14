@@ -13,7 +13,7 @@ export type SceneSpotContent = {
   setCity: (c: number) => void;
   page: number;
   setPage: (c: number) => void;
-  type?: string;
+  type: string | null;
   setType: (t: string) => void;
   citySelections: Array<citySelectionItem>;
   setCitySelections: (s: Array<citySelectionItem>) => void;
@@ -26,7 +26,7 @@ export const initValues = {
   setCity: () => {},
   page: 1,
   setPage: () => {},
-  type: undefined,
+  type: null,
   setType: () => {},
   citySelections: [],
   setCitySelections: () => {},

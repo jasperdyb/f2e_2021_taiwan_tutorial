@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import styled from "styled-components";
 import Head from "next/head";
 import Image from "next/image";
-import { useGetSceneSpots } from "services/sceneSpots";
+import { useGetSceneSpots, useGetTopSceneSpots } from "services/sceneSpots";
 
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -45,11 +45,16 @@ const SceneSpotsCarouselContainer = styled("div")`
 
 const Search: NextPage = () => {
   const [pageData, setPageData] = useState<Array<SceneSpotDataType>>([]);
-  const { page, setPage, city } = useSceneSpotContext();
+  const { page, setPage, city, type } = useSceneSpotContext();
 
   const { spots } = useGetSceneSpots(
-    CityOptions.find((c) => c.value === city)?.searchString
+    CityOptions.find((c) => c.value === city)?.searchString,
+    {
+      // $filter: type,
+    }
   );
+
+  const { topSpots } = useGetTopSceneSpots();
 
   useEffect(() => {
     if (spots)
@@ -85,7 +90,7 @@ const Search: NextPage = () => {
           熱門景點
         </SceneSpotsTitle>
         <SceneSpotsCarouselContainer>
-          <Carousel />
+          <Carousel slideData={topSpots} />
         </SceneSpotsCarouselContainer>
 
         <Stack

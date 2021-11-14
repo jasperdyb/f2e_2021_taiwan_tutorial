@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import banner04 from "public/img/banner04.jpg";
+import banner01 from "public/img/banner01.jpg";
 import Image from "next/image";
 import styled from "styled-components";
 import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+
+import ImageWithFallback from "components/ImageWithFallback";
+import { SceneSpotDataType } from "types/sceneSpots";
 
 const Embla = styled("div")`
   position: relative;
@@ -67,7 +70,7 @@ const EmblaUnselectedSlideInner = styled(EmblaSlideInner)`
   transform: scale(0.8, 0.8);
 `;
 
-const EnblaSlideImage = styled(Image)`
+const EnblaSlideImage = styled(ImageWithFallback)`
   position: absolute;
   display: block;
 `;
@@ -87,7 +90,11 @@ const BeforeButton = styled(NavButton)`
   left: 300px;
 `;
 
-const Carousel: React.FC = () => {
+interface Props {
+  slideData: Array<SceneSpotDataType>;
+}
+
+const Carousel: React.FC<Props> = ({ slideData }) => {
   const [viewportRef, embla] = useEmblaCarousel({
     loop: true,
     align: "center",
@@ -112,36 +119,26 @@ const Carousel: React.FC = () => {
     onSelect();
   }, [embla, onSelect]);
 
-  const hotSceneSpots = [
-    { img: banner04 },
-    { img: banner04 },
-    { img: banner04 },
-    { img: banner04 },
-    { img: banner04 },
-  ];
+  const renderSlide = (item: SceneSpotDataType, index: number) => {
+    const Inner =
+      index === selectedIndex ? EmblaSlideInner : EmblaUnselectedSlideInner;
 
-  const renderSlide = (item, index) => {
-    return index === selectedIndex ? (
+    return (
       <EmblaSlide key={index}>
-        <EmblaSlideInner>
+        <Inner>
           <EnblaSlideImage
-            src={banner04}
+            src={
+              typeof item.Picture.PictureUrl1 === "string"
+                ? item.Picture.PictureUrl1
+                : banner01
+            }
+            loading="eager"
+            layout="fill"
             objectFit="cover"
             objectPosition="center"
             alt="search page banner"
           />
-        </EmblaSlideInner>
-      </EmblaSlide>
-    ) : (
-      <EmblaSlide key={index}>
-        <EmblaUnselectedSlideInner>
-          <EnblaSlideImage
-            src={banner04}
-            objectFit="cover"
-            objectPosition="center"
-            alt="search page banner"
-          />
-        </EmblaUnselectedSlideInner>
+        </Inner>
       </EmblaSlide>
     );
   };
@@ -150,7 +147,8 @@ const Carousel: React.FC = () => {
       <Embla>
         <EmblaViewPort ref={viewportRef}>
           <EmblaContainer>
-            {hotSceneSpots.map((item, index) => renderSlide(item, index))}
+            {slideData &&
+              slideData.map((item, index) => renderSlide(item, index))}
           </EmblaContainer>
         </EmblaViewPort>
 

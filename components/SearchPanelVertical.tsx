@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import styled from "styled-components";
-import { useForm, useWatch, Controller } from "react-hook-form";
+import { useForm, useWatch, Controller, SubmitHandler } from "react-hook-form";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -24,6 +24,7 @@ import SearchSelect from "components/SearchSelect";
 
 import { RegionOptions, CityOptions } from "types/sceneSpots";
 import { useSceneSpotContext } from "context/sceneSpot";
+import { SceneTypeOptions } from "types/sceneSpots";
 
 const FilterTypography = styled(Typography)`
   margin-bottom: 16px;
@@ -45,7 +46,7 @@ const SearchButton = styled(Button)`
 interface sceneSearchFormType {
   region: number;
   city: number;
-  type?: String;
+  type: string | null;
 }
 
 const SearchPanelVertical: React.FC = () => {
@@ -56,19 +57,16 @@ const SearchPanelVertical: React.FC = () => {
     }>
   >([]);
 
-  const { setRegion, city, setCity } = useSceneSpotContext();
+  const { setCity, setType } = useSceneSpotContext();
 
-  const { handleSubmit, formState, watch, setValue, control } =
+  const { handleSubmit, watch, setValue, control } =
     useForm<sceneSearchFormType>();
 
-  const region = useWatch({
-    control,
-    name: "region",
-    defaultValue: RegionOptions[0].value,
-  });
+  const region = watch("region", RegionOptions[0].value);
 
-  const onSubmit = (data: sceneSearchFormType) => {
+  const onSubmit: SubmitHandler<sceneSearchFormType> = (data) => {
     setCity(data.city);
+    setType(data.type);
   };
 
   useEffect(() => {
@@ -137,7 +135,29 @@ const SearchPanelVertical: React.FC = () => {
         <Typography typography={"h1"} color="info.main">
           類別
         </Typography>
-        <SearchPanelTypeList />
+
+        <Controller
+          name="type"
+          control={control}
+          defaultValue={null}
+          render={({
+            field: { onChange, onBlur, value, name, ref },
+            fieldState: { invalid, isTouched, isDirty, error },
+            formState,
+          }) => (
+            <SearchPanelTypeList
+              options={SceneTypeOptions}
+              value={value}
+              onChange={(
+                event: React.ChangeEvent<HTMLInputElement>,
+                value: string
+              ) => {
+                onChange(value);
+              }}
+            />
+          )}
+        />
+
         <Stack direction={"row"} justifyContent={"center"}>
           <SearchButton
             disableElevation
