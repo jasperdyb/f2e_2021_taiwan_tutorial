@@ -1,38 +1,91 @@
 import type { AppProps } from "next/app";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { useContext, createContext } from "react";
+import { createGlobalStyle } from "styled-components";
+import CssBaseline from "@mui/material/CssBaseline";
+import {
+  createTheme,
+  styled,
+  ThemeProvider,
+  darken,
+} from "@mui/material/styles";
+import { SceneSpotContextProvider } from "context/sceneSpot";
 
 const GlobalStyle = createGlobalStyle`
-html{
-  box-sizing: border-box;
-  background: #F5F4F0;
-  display:block;
-  height: 100%;
-  max-width: 640px;
-  margin:0 auto;
-  padding: 0;
+html{ 
 }
 
-body{
-  background-color:#fafafa;
-  min-height:100vh;
-  padding: 1rem;
-  margin-top:0;
-  font-family:Verdana;
+body{ 
 }
 `;
 
-const theme = {
-  colors: {
-    primary: "#fafafa",
+const mainTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#E8CB89",
+    },
+    secondary: {
+      main: "#A6CDE0",
+    },
+    info: {
+      main: "#7BAEBE",
+    },
   },
-};
+
+  shape: {
+    borderRadius: 15,
+  },
+
+  typography: {
+    // fontFamily:font-family: PingFangTC-Regular, sans-serif,
+    fontFamily: [
+      "'EB Garamond'",
+      "PingFang TC",
+      "'Noto Sans TC'",
+      "Roboto",
+      "sans-serif",
+    ].join(","),
+    fontSize: 14,
+
+    h1: {
+      fontSize: "22px",
+      letterSpacing: "1.54px",
+      lineHeight: "30px",
+    },
+    h2: {
+      fontSize: "18px",
+      letterSpacing: "1.26px",
+      lineHeight: "25px",
+    },
+    subtitle1: {
+      fontSize: "14px",
+      lineHeight: "16px",
+    },
+    body1: {
+      fontSize: "16px",
+      lineHeight: "25px",
+    },
+  },
+
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        containedPrimary: {
+          color: "#FFF",
+        },
+      },
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <CssBaseline />
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+      <ThemeProvider theme={mainTheme}>
+        <SceneSpotContextProvider>
+          <Component {...pageProps} />
+        </SceneSpotContextProvider>
       </ThemeProvider>
     </>
   );
