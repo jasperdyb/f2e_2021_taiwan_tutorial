@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useForm, useWatch, Controller, SubmitHandler } from "react-hook-form";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useRouter } from "next/router";
 
 import MenuItem from "@mui/material/MenuItem";
 
 import SearchSelect from "components/SearchSelect";
+import { RegionOptions, CityOptions } from "types/sceneSpots";
+import { useSceneSpotContext } from "context/sceneSpot";
 
 const SearchPanelCard = styled(Card)`
   padding: 30px 18px;
@@ -24,39 +28,46 @@ const SearchButton = styled(Button)`
   height: 50px;
 `;
 
+interface sceneSearchFormType {
+  region: number;
+  city: number;
+}
+
 const SearchPanel: React.FC = () => {
-  const [region, setRegion] = useState(10);
-  const [city, setCity] = useState(30);
+  const router = useRouter();
+  const { region, city, setCity, setType } = useSceneSpotContext();
+  const { handleSubmit, watch, setValue, control } =
+    useForm<sceneSearchFormType>({
+      defaultValues: {
+        region,
+        city,
+      },
+    });
+  const [citySelections, setCitySelections] = useState<
+    Array<{
+      title: string;
+      value: number;
+    }>
+  >([]);
 
-  const regionSelections = [
-    {
-      title: "北部地區",
-      value: 10,
-    },
-    {
-      title: "中部地區",
-      value: 20,
-    },
-    {
-      title: "南部地區",
-      value: 30,
-    },
-  ];
+  const onSubmit: SubmitHandler<sceneSearchFormType> = (data) => {
+    setCity(data.city);
+    setType(null);
 
-  const citySelections = [
-    {
-      title: "台北市",
-      value: 10,
-    },
-    {
-      title: "台中市",
-      value: 20,
-    },
-    {
-      title: "台南市",
-      value: 30,
-    },
-  ];
+    router.push("search");
+  };
+  const formRegion = watch("region", RegionOptions[0].value);
+
+  useEffect(() => {
+    const options = CityOptions.filter((city) => {
+      return city.region === formRegion;
+    });
+    setCitySelections(options);
+
+    if (options && options.length) {
+      setValue("city", options[0].value);
+    }
+  }, [formRegion]);
 
   return (
     <SearchPanelCard raised>
@@ -70,27 +81,51 @@ const SearchPanel: React.FC = () => {
         <Grid item>
           <Grid item container spacing={"18px"}>
             <Grid item>
-              <SearchSelect
-                selections={regionSelections}
-                value={region}
-                onChange={(event: SelectChangeEvent<unknown>) => {
-                  setRegion(event.target.value);
-                }}
+              <Controller
+                name="region"
+                control={control}
+                render={({
+                  field: { onChange, onBlur, value, name, ref },
+                  fieldState: { invalid, isTouched, isDirty, error },
+                  formState,
+                }) => (
+                  <SearchSelect
+                    selections={RegionOptions}
+                    value={value}
+                    onChange={(event: SelectChangeEvent<unknown>) => {
+                      onChange(event.target.value);
+                    }}
+                  />
+                )}
               />
             </Grid>
             <Grid item>
-              <SearchSelect
-                selections={citySelections}
-                value={region}
-                onChange={(event: SelectChangeEvent<unknown>) => {
-                  setCity(event.target.value);
-                }}
+              <Controller
+                name="city"
+                control={control}
+                render={({
+                  field: { onChange, onBlur, value, name, ref },
+                  fieldState: { invalid, isTouched, isDirty, error },
+                  formState,
+                }) => (
+                  <SearchSelect
+                    selections={citySelections}
+                    value={value}
+                    onChange={(event: SelectChangeEvent<unknown>) => {
+                      onChange(event.target.value);
+                    }}
+                  />
+                )}
               />
             </Grid>
           </Grid>
         </Grid>
         <Grid item>
-          <SearchButton disableElevation variant="contained">
+          <SearchButton
+            disableElevation
+            variant="contained"
+            onClick={handleSubmit(onSubmit)}
+          >
             Search
           </SearchButton>
         </Grid>

@@ -57,12 +57,18 @@ const SearchPanelVertical: React.FC = () => {
     }>
   >([]);
 
-  const { setCity, setType } = useSceneSpotContext();
+  const { region, city, type, setCity, setType } = useSceneSpotContext();
 
   const { handleSubmit, watch, setValue, control } =
-    useForm<sceneSearchFormType>();
+    useForm<sceneSearchFormType>({
+      defaultValues: {
+        region,
+        city,
+        type,
+      },
+    });
 
-  const region = watch("region", RegionOptions[0].value);
+  const formRegion = watch("region", RegionOptions[0].value);
 
   const onSubmit: SubmitHandler<sceneSearchFormType> = (data) => {
     setCity(data.city);
@@ -71,14 +77,14 @@ const SearchPanelVertical: React.FC = () => {
 
   useEffect(() => {
     const options = CityOptions.filter((city) => {
-      return city.region === region;
+      return city.region === formRegion;
     });
     setCitySelections(options);
 
     if (options && options.length) {
       setValue("city", options[0].value);
     }
-  }, [region]);
+  }, [formRegion]);
 
   return (
     <Card raised>
@@ -94,7 +100,6 @@ const SearchPanelVertical: React.FC = () => {
             <Controller
               name="region"
               control={control}
-              defaultValue={RegionOptions[0].value}
               render={({
                 field: { onChange, onBlur, value, name, ref },
                 fieldState: { invalid, isTouched, isDirty, error },
@@ -114,7 +119,6 @@ const SearchPanelVertical: React.FC = () => {
             <Controller
               name="city"
               control={control}
-              defaultValue={CityOptions[0].value}
               render={({
                 field: { onChange, onBlur, value, name, ref },
                 fieldState: { invalid, isTouched, isDirty, error },

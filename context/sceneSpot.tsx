@@ -20,9 +20,9 @@ export type SceneSpotContent = {
 };
 
 export const initValues = {
-  region: 10,
+  region: RegionOptions[0].value,
   setRegion: () => {},
-  city: 10,
+  city: CityOptions[0].value,
   setCity: () => {},
   page: 1,
   setPage: () => {},
