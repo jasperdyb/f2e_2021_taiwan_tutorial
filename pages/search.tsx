@@ -27,6 +27,8 @@ import NavBreadCrumbs from "components/NavBreadCrumbs";
 import Footer from "components/Footer";
 
 import { SceneSpotDataType } from "types/sceneSpots";
+import { useSceneSpotContext } from "context/sceneSpot";
+import { CityOptions } from "types/sceneSpots";
 
 const NavBreadCrumbContainer = styled("div")`
   margin-top: 18px;
@@ -42,9 +44,12 @@ const SceneSpotsCarouselContainer = styled("div")`
 `;
 
 const Search: NextPage = () => {
-  const [page, setPage] = useState(1);
   const [pageData, setPageData] = useState<Array<SceneSpotDataType>>([]);
-  const { spots } = useGetSceneSpots();
+  const { page, setPage, city } = useSceneSpotContext();
+
+  const { spots } = useGetSceneSpots(
+    CityOptions.find((c) => c.value === city)?.searchString
+  );
 
   useEffect(() => {
     if (spots)
@@ -56,15 +61,10 @@ const Search: NextPage = () => {
       );
   }, [page, spots]);
 
-  useEffect(() => {
-    console.log("==== page ===", page);
-    console.log("==== pageData ===", pageData);
-  }, [pageData]);
-
   return (
     <>
       <Head>
-        <title>Hello World</title>
+        <title>TaiwanTravel</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar color="secondary" />

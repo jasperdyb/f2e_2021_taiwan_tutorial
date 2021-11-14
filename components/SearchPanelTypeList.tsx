@@ -9,22 +9,9 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Grid from "@mui/material/Grid";
 
-const CustomDiv = styled("div")``;
+import { SceneTypeOptions } from "types/sceneSpots";
 
-const options = [
-  {
-    value: "female",
-    label: "female",
-  },
-  {
-    value: "male",
-    label: "male",
-  },
-  {
-    value: "other",
-    label: "other",
-  },
-];
+const CustomDiv = styled("div")``;
 
 const SearchPanelTypeList: React.FC = () => {
   return (
@@ -35,7 +22,7 @@ const SearchPanelTypeList: React.FC = () => {
         name="radio-buttons-group"
       >
         <Grid container>
-          {options.map((item, index) => (
+          {SceneTypeOptions.map((item, index) => (
             <Grid item key={index} xs={12}>
               <FormControlLabel
                 value={item.value}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { styled as muiStyled } from "@mui/material/styles";
 import Image from "next/image";
@@ -49,6 +49,20 @@ interface Props {
 const SceneInfoCard: React.FC<Props> = ({ sceneSpotData }) => {
   const theme = useTheme();
 
+  const [sceneType, setSceneType] = useState<String>("");
+
+  useEffect(() => {
+    setSceneType(
+      sceneSpotData.Class1
+        ? sceneSpotData.Class1
+        : sceneSpotData.Class2
+        ? sceneSpotData.Class2
+        : sceneSpotData.Class3
+        ? sceneSpotData.Class3
+        : "景點"
+    );
+  }, []);
+
   return (
     <>
       {sceneSpotData && (
@@ -93,10 +107,7 @@ const SceneInfoCard: React.FC<Props> = ({ sceneSpotData }) => {
                     <Typography typography={"h1"} color="info.main">
                       {sceneSpotData.Name.split("_").pop()}
                     </Typography>
-                    <SceneTypeChip
-                      label={sceneSpotData.Class1}
-                      color="primary"
-                    />
+                    <SceneTypeChip label={sceneType} color="primary" />
                   </Stack>
                 </Grid>
                 <Grid item flex={1}>
@@ -135,7 +146,9 @@ const SceneInfoCard: React.FC<Props> = ({ sceneSpotData }) => {
                               color="grey.600"
                               noWrap
                             >
-                              {sceneSpotData.OpenTime}
+                              {sceneSpotData.OpenTime
+                                ? sceneSpotData.OpenTime
+                                : "未提供"}
                             </Typography>
                           </Tooltip>
                         </OpenTimeContainer>

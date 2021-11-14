@@ -11,6 +11,10 @@ module.exports = {
       "www.northguan-nsa.gov.tw",
       "newtaipei.travel",
       "www.trimt-nsa.gov.tw",
+      "www.penghu-nsa.gov.tw",
+      "www.eastcoast-nsa.gov.tw",
+      "www.ali-nsa.net",
+      "tourism.chcg.gov.tw",
     ],
   },
 };

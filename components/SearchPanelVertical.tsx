@@ -42,25 +42,8 @@ const SearchButton = styled(Button)`
 `;
 
 const SearchPanelVertical: React.FC = () => {
-  const [region, setRegion] = useState(10);
-  const [citySelections, setCitySelections] = useState<
-    Array<{
-      title: string;
-      value: number;
-    }>
-  >([]);
-  const { city, setCity } = useSceneSpotContext();
-
-  useEffect(() => {
-    const options = CityOptions.filter((city) => {
-      return city.region === region;
-    });
-    setCitySelections(options);
-
-    if (options && options.length) {
-      setCity(options[0].value);
-    }
-  }, [region]);
+  const { region, setRegion, city, setCity, citySelections } =
+    useSceneSpotContext();
 
   return (
     <Card raised>
@@ -95,7 +78,7 @@ const SearchPanelVertical: React.FC = () => {
         <Typography typography={"h1"} color="info.main">
           類別
         </Typography>
-        <SearchPanelTypeList></SearchPanelTypeList>
+        <SearchPanelTypeList />
         <Stack direction={"row"} justifyContent={"center"}>
           <SearchButton disableElevation variant="contained">
             Search

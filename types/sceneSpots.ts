@@ -37,6 +37,30 @@ export const CityOptions = [
   { title: "連江縣", value: 220, searchString: "LienchiangCounty", region: 50 },
 ];
 
+export const SceneTypeOptions = [
+  {
+    value: "遊憩類",
+    label: "觀光遊憩",
+  },
+  {
+    value: "自然風景類",
+    label: "自然風景",
+  },
+  {
+    value: "藝術類",
+    label: "文藝之旅",
+  },
+  {
+    value: "文化類",
+    label: "歷史文化",
+  },
+];
+
+export interface SceneSpotSearchOptions {
+  $orderby: String;
+  $top: number;
+}
+
 export interface SceneSpotDataType {
   ID: String; //
   Name: String; // optional

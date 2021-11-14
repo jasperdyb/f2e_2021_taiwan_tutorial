@@ -18,7 +18,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Hello World</title>
+        <title>TaiwanTravel</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Background src={banner01}>

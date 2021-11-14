@@ -3,7 +3,7 @@ import jsSHA from "jssha";
 import useSWR from "swr";
 import apiList from "services/_api";
 
-import { SceneSpotDataType } from "types/sceneSpots";
+import { SceneSpotDataType, SceneSpotSearchOptions } from "types/sceneSpots";
 import { useSceneSpotContext } from "context/sceneSpot";
 import { CityOptions } from "types/sceneSpots";
 
@@ -32,23 +32,32 @@ function getAuthorizationHeader() {
   return { Authorization: Authorization, "X-Date": GMTString };
 }
 
-const fetcher = (url: string) => instance.get(url).then((res) => res.data);
+const fetcher = (url: string, $top: number, $orderby: String) =>
+  instance.get(url, { params: { $top, $orderby } }).then((res) => res.data);
 const postFetcher = (url: string) => instance.get(url).then((res) => res.data);
 
 // const fetcher = instance.get("Rail/TRA/Station?$top=10&$format=JSON");
 
-export function useGetSceneSpots(City: string = "Taipei"): {
+export function useGetSceneSpots(
+  City = "Taipei",
+  options = {
+    $orderby: null,
+    $top: null,
+  }
+): {
   spots: Array<SceneSpotDataType>;
   isLoading: boolean;
   isError: boolean;
 } {
   console.log("==== useGetSceneSpots ===");
 
-  const { city } = useSceneSpotContext();
-  const selectedCity = CityOptions.find((c) => c.value === city)?.searchString;
-  console.log("==== selectedCity ===", selectedCity);
+  const top = 10;
 
-  const { data, error } = useSWR(apiList.ScenicSpots(selectedCity), fetcher);
+  const { data, error } = useSWR(
+    // [apiList.ScenicSpots(City), options.$top, options.$orderby],
+    null,
+    fetcher
+  );
 
   return {
     spots: data,
